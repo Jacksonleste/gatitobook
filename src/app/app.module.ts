@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MensagensModule } from './mensagens/mensagens.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MensagensModule
   ],
   providers: [],
   bootstrap: [AppComponent]

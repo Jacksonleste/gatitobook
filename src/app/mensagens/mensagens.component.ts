@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MensagensComponent implements OnInit {
 
+  @Input() formDir!:NgForm;
+  @Input() campo:any = '';
   @Input() mensagem:string = '';
 
   constructor() { }
