@@ -1,1 +1,1 @@
-<small *ngIf="formDir.submitted && campo.invalid || (campo?.touched && campo?.invalid)" class="text-danger d-block mt-2">{{ mensagem }}</small>
+<small *ngIf="(formDir.submitted || campo?.touched)&& campo.errors?.[error] == true || (campo?.touched && campo.errors?.[error] == true) || formDir.errors?.[error]" class="text-danger d-block mt-2">{{ mensagem }}</small>

@@ -1,23 +1,75 @@
 <h4 class="text-center">Registre-se e mostre seu pet ao mundo!</h4>
 
-<form class="form-group mt-4">
+<form class="form-group mt-4" #formNovoUsuario="ngForm"
+  [formGroup]="novoUsuarioForm" (ngSubmit)="cadastrar()">
   <div class="form-group mb-3">
-    <input placeholder="E-mail" type="email" class="form-control" />
+    <input
+      placeholder="E-mail"
+      type="email"
+      class="form-control"
+      formControlName="email"
+      name="email"
+      id="email"
+      />
+    <app-mensagens mensagem="Campo 'E-mail' é Obrigatório" error="required"
+      [campo]="formNovoUsuario.form.controls['email']"
+      [formDir]="formNovoUsuario"></app-mensagens>
+    <app-mensagens mensagem="formatação de E-mail inválida" error="email"
+      [campo]="formNovoUsuario.form.controls['email']"
+      [formDir]="formNovoUsuario"></app-mensagens>
   </div>
   <div class="form-group mb-3">
-    <input placeholder="Nome completo" type="text" class="form-control" />
+    <input
+      placeholder="Nome completo"
+      type="text"
+      class="form-control"
+      formControlName="fullName"
+      name="fullName"
+      id="fullName"
+      />
+    <app-mensagens mensagem="Campo 'Nome Completo' é Obrigatório"
+      error="required" [campo]="formNovoUsuario.form.controls['fullName']"
+      [formDir]="formNovoUsuario"></app-mensagens>
   </div>
   <div class="form-group mb-3">
-    <input placeholder="Usuario" type="text" class="form-control" />
+    <input
+      placeholder="Usuário"
+      type="text"
+      class="form-control"
+      formControlName="userName"
+      name="userName"
+      id="userName"
+      />
+    <app-mensagens mensagem="Campo 'Usuário' é Obrigatório"
+      error="required" [campo]="formNovoUsuario.form.controls['userName']"
+      [formDir]="formNovoUsuario"></app-mensagens>
+    <app-mensagens mensagem="Somente caracteres minuculos no usuário"
+      error="minusculo" [campo]="formNovoUsuario.form.controls['userName']"
+      [formDir]="formNovoUsuario"></app-mensagens>
+    <app-mensagens mensagem="Esse nome de usuário já existe"
+      error="usuarioExistente" [campo]="formNovoUsuario.form.controls['userName']"
+      [formDir]="formNovoUsuario"></app-mensagens>
   </div>
   <div class="form-group mb-3">
-    <input placeholder="Senha" type="password" class="form-control" />
+    <input
+      placeholder="Senha"
+      type="password"
+      class="form-control"
+      formControlName="password"
+      name="password"
+      id="password"
+      />
+      <app-mensagens mensagem="Campo 'Senha' é Obrigatório"
+      error="required" [campo]="formNovoUsuario.form.controls['password']"
+      [formDir]="formNovoUsuario"></app-mensagens>
+      <app-mensagens mensagem="usuario nao pode ser igual a senha"
+      error="senhaIgualUsuario"
+      [formDir]="formNovoUsuario"></app-mensagens>
   </div>
 
   <div class="d-grid gap-2">
-    <button
-      class="btn btn-primary">
-      Criar conta
-    </button>
+    <button class="btn btn-primary">Criar conta</button>
   </div>
 </form>
+
+<p>Já é um usuário? <a routerLink="">Faça login</a></p>
