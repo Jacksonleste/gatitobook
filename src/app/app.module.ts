@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MensagensModule } from './mensagens/mensagens.module';
+import { RouterModule } from '@angular/router';
+import { RodapeModule } from './rodape/rodape.module';
+import { CabecalhoModule } from './cabecalho/cabecalho.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,11 @@ import { MensagensModule } from './mensagens/mensagens.module';
     AppRoutingModule,
     HomeModule,
     FormsModule,
+    RouterModule,
     HttpClientModule,
-    MensagensModule
+    MensagensModule,
+    CabecalhoModule,
+    RodapeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

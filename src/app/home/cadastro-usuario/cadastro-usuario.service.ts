@@ -13,7 +13,7 @@ export class CadastroUsuarioService {
   constructor(private http: HttpClient) {}
 
   cadastrarUsuario(usuario: NovoUsuario) {
-    return this.http.post(`${this.apiUrl}user/singup`, usuario);
+    return this.http.post(`${this.apiUrl}user/signup`, usuario);
   }
 
   verificaUsuarioExiste(nomeUser: string){

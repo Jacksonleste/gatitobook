@@ -22,10 +22,14 @@ export class LoginComponent implements OnInit {
     if(formDir.invalid){
       return;
     }
-    this.authService.logar({userName: this.usuario, password: this.senha}).subscribe((result)=>{
-      this.router.navigateByUrl('/animais')
-    }, (error)=>{
-      alert('Usuário ou senha inválida!')
+    this.authService.logar({userName: this.usuario, password: this.senha}).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/animais')
+      },
+      error: (err) => {
+        console.log(err);
+        alert('Usuário ou senha inválida!')
+      }
     })
   }
 }

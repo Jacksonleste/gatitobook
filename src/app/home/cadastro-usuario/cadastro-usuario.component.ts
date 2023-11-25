@@ -1,6 +1,7 @@
 import { UsuarioExisteService } from './usuario-existe.service';
 import { CadastroUsuarioService } from './cadastro-usuario.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -9,6 +10,8 @@ import {
 } from '@angular/forms';
 import { NovoUsuario } from './novo-usuario';
 import { usuarioSenhaIguaisValidator } from './usuario-senha-iguais.validator';
+import { relative } from 'path';
+import { error } from 'console';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -19,6 +22,7 @@ export class CadastroUsuarioComponent implements OnInit {
   novoUsuarioForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private cadastroUsuarioService: CadastroUsuarioService,
     private usuarioExisteService: UsuarioExisteService
@@ -29,20 +33,35 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   initCadastroUsuarioForm() {
-    this.novoUsuarioForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      fullName: ['', [Validators.required, Validators.minLength(4)]],
-      userName: ['', [Validators.required, this.validatorMinusculo], [this.usuarioExisteService.usuarioExiste()]],
-      password: ['', [Validators.required]],
-    }, {
-      validators: [usuarioSenhaIguaisValidator],
-    });
+    this.novoUsuarioForm = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        fullName: ['', [Validators.required, Validators.minLength(4)]],
+        userName: [
+          '',
+          [Validators.required, this.validatorMinusculo],
+          [this.usuarioExisteService.usuarioExiste()],
+        ],
+        password: ['', [Validators.required]],
+      },
+      {
+        validators: [usuarioSenhaIguaisValidator],
+      }
+    );
   }
 
   cadastrar() {
-    console.log(this.novoUsuarioForm.controls)
-    const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
-    console.log(novoUsuario);
+    if (!this.novoUsuarioForm.valid) {
+      return;
+    }
+
+    const  novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
+    this.cadastroUsuarioService.cadastrarUsuario(novoUsuario).subscribe((a) => {
+      this.router.navigate(['']);
+    },
+    (error)=>{
+      console.error(error)
+    });
   }
 
   validatorMinusculo(control: FormControl) {
